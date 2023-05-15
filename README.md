@@ -26,9 +26,8 @@ CrowdStrike Falcon Contain GUI for more powerful and rapid host containment
     - Falcon API Endpoint URL (default is api.crowdstrike.com)  
     - Falcon API ClientID  
     - Falcon API Secret
-  5. (Optional) Edit FalconContain.ps1 and update the following variables to include a core DHCP, DNS, and at least one domain controller.  These are protected endpoints that will not be affected by contain/uncontain actions, even if they are returned in the results of a query.  In an upcoming release, an unlimited number of hosts can be specified via a file.  Note, these must be Falcon AIDs, not host names:  
-    - $DC1='EnterAIDhere'  
-    - $DC2='EnterAIDhere'
+  5. (Optional) Edit ProtectedAIDs.txt after the first run and add Falcon AIDs (exactly one per line) for hosts like core DHCP, DNS, and perhaps a domain controller.  These are protected endpoints that will not be affected by contain/uncontain actions, even if they are returned in the results of a query.  Note, the entries must be Falcon AIDs, not host names, so should look like this:  
+    - 443864e5193bd38ca6fcd81067ab331b
 
 ## Running Falcon Contain
   1. Execute the FalconContain.ps1 script  
