@@ -43,4 +43,4 @@ CrowdStrike Falcon® Contain GUI for more powerful and rapid host containment
   
   
   
-CrowdStrike Falcon® is a registered trademark, and [associated trademarks are owned by ](https://www.crowdstrike.com)
+CrowdStrike Falcon® is a registered trademark, and [associated trademarks are owned by CrowdStrike](https://www.crowdstrike.com)
