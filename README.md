@@ -8,7 +8,7 @@ CrowdStrike Falcon® Contain GUI for more powerful and rapid host containment
 ## Requirements
   1. CrowdStrike Falcon® API Client ID and Secret with query and contain/uncontain rights
   2. The Falcon® API endpoint URL for your tenant
-  3. A GUI (non-Server Core) Windows install that can run PowerShell.  No additional PowerShell modules are required.
+  3. A GUI (non-Server Core) Windows install that can run PowerShell.  No additional PowerShell modules or libraries are required.
   4. FalconContain.ps1 from this repository  
   5. Familiarity with the Falcon® Query Lancuage (FQL) if you intend to contain/uncontain hosts in this manner
 
