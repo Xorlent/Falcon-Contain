@@ -1,6 +1,6 @@
 <# 
 .NAME
-    Falcon Contain
+    Falcon® Contain
 #>
 
 # API connction ID and secret encrypted with the Windows Data Protection API.
