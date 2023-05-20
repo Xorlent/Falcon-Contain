@@ -54,9 +54,9 @@ else { # Config file exists, read API details from config.
     $apiKeySS = ConvertTo-SecureString $apiKeyTxt
     }
 
-# Decrypt the API connection details for the session
-$APIUser = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
-$APIKey = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
+# Decrypt the API connection details for the session DELETE IF TEST SUCCESS
+#$APIUser = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+#$APIKey = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
 
 function QueryGroups() # All this does is asks Falcon for the latest Host Group list for GUI dropdown display
 {
@@ -67,8 +67,8 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
@@ -306,8 +306,8 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
@@ -349,8 +349,8 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
@@ -411,8 +411,8 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
@@ -477,6 +477,6 @@ Start-Transcript -Path $LogPath
 #End logging
 Stop-Transcript
 
-# Clear the API connection detail variables
-$APIUser = $null
-$APIKey = $null
+# Clear the API connection detail variables DELETE IF TEST SUCCESS
+#$APIUser = $null
+#$APIKey = $null
