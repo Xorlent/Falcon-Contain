@@ -54,7 +54,7 @@ else { # Config file exists, read API details from config.
     $apiKeySS = ConvertTo-SecureString $apiKeyTxt
     }
 
-function QueryGroups() # All this does is asks Falcon for the latest Host Group list for GUI dropdown display
+function QueryGroups() # All this does is ask Falcon for the latest Host Group list for GUI dropdown display
 {
 
 $TokenRequestHeaders = @{
