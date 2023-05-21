@@ -3,6 +3,11 @@
     Falcon® Contain
 #>
 
+if (!$IsWindows){
+  Write-Host "Sorry, Falcon Contain is only intended for the Windows operating system."
+  Exit
+}
+
 # API connction ID and secret encrypted with the Windows Data Protection API.
 ###### NOTE: Encrypted config file is not portable between users/machines. ######
 $ConfigFile = 'FalconContain-Config.xml'
