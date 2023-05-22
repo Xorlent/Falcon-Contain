@@ -1,9 +1,9 @@
-<# 
+﻿<# 
 .NAME
     Falcon® Contain
 #>
 
-if (!$IsWindows){
+if ([System.Environment]::OSVersion.Platform -ne 'Win32NT'){
   Write-Host "Sorry, Falcon Contain is only intended for the Windows operating system."
   Exit
 }
@@ -98,7 +98,7 @@ Add-Type -AssemblyName System.Windows.Forms
 #Form Window
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(725,525)
-$Form.text                       = "Falcon Contain 1.1.1 May 20 2023"
+$Form.text                       = "Falcon Contain 1.1.2 May 22 2023"
 $Form.TopMost                    = $false
 
 #AID form entry field
@@ -255,7 +255,7 @@ $SpecifyLiftContain2.Font         = New-Object System.Drawing.Font('Microsoft Sa
 
 #Hint regarding log file output at bottom of form
 $SafetyInfo                         = New-Object system.Windows.Forms.Label
-$SafetyInfo.text                  = "NOTE: Protected hosts can only be contained/lifted using the AID dialog."
+$SafetyInfo.text                  = "NOTE: Protected hosts (in ProtectedAIDs.txt) can only be contained/lifted using the AID dialog."
 $SafetyInfo.AutoSize              = $true
 $SafetyInfo.width                 = 650
 $SafetyInfo.height                = 20
