@@ -1,7 +1,12 @@
-<# 
+﻿<# 
 .NAME
-    Container
+    Falcon® Contain
 #>
+
+if ([System.Environment]::OSVersion.Platform -ne 'Win32NT'){
+  Write-Host "Sorry, Falcon Contain is only intended for the Windows operating system."
+  Exit
+}
 
 # API connction ID and secret encrypted with the Windows Data Protection API.
 ###### NOTE: Encrypted config file is not portable between users/machines. ######
@@ -54,11 +59,7 @@ else { # Config file exists, read API details from config.
     $apiKeySS = ConvertTo-SecureString $apiKeyTxt
     }
 
-# Decrypt the API connection details for the session
-$APIUser = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
-$APIKey = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
-
-function QueryGroups() # All this does is asks Falcon for the latest Host Group list for GUI dropdown display
+function QueryGroups() # All this does is ask Falcon for the latest Host Group list for GUI dropdown display
 {
 
 $TokenRequestHeaders = @{
@@ -67,12 +68,13 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
+$FormData = $null
 
 if ($ValidToken)
     {
@@ -96,7 +98,7 @@ Add-Type -AssemblyName System.Windows.Forms
 #Form Window
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(725,525)
-$Form.text                       = "Falcon Contain 1.1.0 May 15 2023"
+$Form.text                       = "Falcon Contain 1.1.2 May 22 2023"
 $Form.TopMost                    = $false
 
 #AID form entry field
@@ -253,7 +255,7 @@ $SpecifyLiftContain2.Font         = New-Object System.Drawing.Font('Microsoft Sa
 
 #Hint regarding log file output at bottom of form
 $SafetyInfo                         = New-Object system.Windows.Forms.Label
-$SafetyInfo.text                  = "NOTE: Protected hosts can only be contained/lifted using the AID dialog."
+$SafetyInfo.text                  = "NOTE: Protected hosts (in ProtectedAIDs.txt) can only be contained/lifted using the AID dialog."
 $SafetyInfo.AutoSize              = $true
 $SafetyInfo.width                 = 650
 $SafetyInfo.height                = 20
@@ -306,12 +308,13 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
+$FormData = $null
 
 if ($ValidToken)
     {
@@ -349,12 +352,13 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
+$FormData = $null
 
 if ($ValidToken)
     {
@@ -411,12 +415,13 @@ $TokenRequestHeaders = @{
   }
 
 $FormData = @{
-  'client_id' = $APIUser
-  'client_secret' = $APIKey
+  'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
+  'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
   
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
+$FormData = $null
 
 if ($ValidToken)
     {
@@ -477,6 +482,5 @@ Start-Transcript -Path $LogPath
 #End logging
 Stop-Transcript
 
-# Clear the API connection detail variables
-$APIUser = $null
-$APIKey = $null
+# Clear $FormData variable before closing, just to be sure
+$FormData = $null
