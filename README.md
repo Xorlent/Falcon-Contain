@@ -27,7 +27,7 @@ CrowdStrike Falcon® Contain GUI for more powerful and rapid host containment
     - Falcon API ClientID  
     - Falcon API Secret
   5. (Optional) Edit ProtectedAIDs.txt after the first run and add Falcon AIDs (one per line) for hosts like core DHCP, DNS, and perhaps a domain controller.  Comments can be added on the same line as each AID entry.  These are protected endpoints that will not be affected by contain/uncontain actions, even if they are returned in the results of a query.  Note, the entries must be Falcon AIDs, not host names, so should look like this:  
-  443864e5193bd38ca6fcd81067ab331b
+  ```443864e5193bd38ca6fcd81067ab331b```
 
 ## Running Falcon® Contain
   1. Execute the FalconContain.ps1 script  
