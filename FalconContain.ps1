@@ -75,6 +75,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -315,6 +316,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -359,6 +361,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -422,6 +425,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -482,5 +486,6 @@ Start-Transcript -Path $LogPath
 #End logging
 Stop-Transcript
 
-# Clear $FormData variable before closing, just to be sure
+# Clear $FormData variable before closing and run garbage collection again, just to be sure
 $FormData = $null
+[System.GC]::Collect()
