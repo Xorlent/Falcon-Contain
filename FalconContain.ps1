@@ -89,6 +89,12 @@ if ($ValidToken)
     $GetResponse = Invoke-RestMethod -Uri $GetRequest -Method 'Get' -ContentType 'application/json;charset=utf-8' -Headers $DownloadRequestHeaders
     return $GetResponse # Return the current list of Host Groups
     }
+else # We were not able to establish a connection to the API, so bail out of this session.
+    {
+    Write-Host
+    Write-Host "Connection to the CrowdStrike API failed.  Verify your API credentials, permission, and network access to the API endpoint."
+    exit
+    }
 } # End QueryGroups
 
 $GroupList = QueryGroups # Call function to get and return an object with the current list of Falcon Host Groups
@@ -99,7 +105,7 @@ Add-Type -AssemblyName System.Windows.Forms
 #Form Window
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(725,525)
-$Form.text                       = "Falcon Contain 1.1.2 May 22 2023"
+$Form.text                       = "Falcon Contain 1.1.3 July 4 2023"
 $Form.TopMost                    = $false
 
 #AID form entry field
