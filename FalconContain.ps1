@@ -75,6 +75,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -88,6 +89,12 @@ if ($ValidToken)
     $GetResponse = Invoke-RestMethod -Uri $GetRequest -Method 'Get' -ContentType 'application/json;charset=utf-8' -Headers $DownloadRequestHeaders
     return $GetResponse # Return the current list of Host Groups
     }
+else # We were not able to establish a connection to the API, so bail out of this session.
+    {
+    Write-Host
+    Write-Host "Connection to the CrowdStrike API failed.  Verify your API credentials, permission, and network access to the API endpoint."
+    exit
+    }
 } # End QueryGroups
 
 $GroupList = QueryGroups # Call function to get and return an object with the current list of Falcon Host Groups
@@ -98,7 +105,7 @@ Add-Type -AssemblyName System.Windows.Forms
 #Form Window
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(725,525)
-$Form.text                       = "Falcon Contain 1.1.2 May 22 2023"
+$Form.text                       = "Falcon Contain 1.1.3 July 4 2023"
 $Form.TopMost                    = $false
 
 #AID form entry field
@@ -315,6 +322,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -359,6 +367,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -422,6 +431,7 @@ $FormData = @{
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
+[System.GC]::Collect()
 
 if ($ValidToken)
     {
@@ -482,5 +492,6 @@ Start-Transcript -Path $LogPath
 #End logging
 Stop-Transcript
 
-# Clear $FormData variable before closing, just to be sure
+# Clear $FormData variable before closing and run garbage collection again, just to be sure
 $FormData = $null
+[System.GC]::Collect()
