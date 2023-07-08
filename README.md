@@ -31,9 +31,9 @@ CrowdStrike Falcon® Contain GUI for more powerful and rapid host containment
 
 ## Running Falcon® Contain
   1. Execute the FalconContain.ps1 script  
-    - Contain / un-contain via AID requires the user to first look up the AIDs of hosts  
-    - Contain / un-contain via FQL allows more flexible queries of hosts   
-    - Contain / un-contain via Host Groups allows the user to simply select a Falcon host group (these are configured in your tenant)  
+    - Contain / un-contain via AID requires the user to first look up the AIDs of hosts in the Falcon console  
+    - Contain / un-contain via FQL allows more flexible queries of hosts, with a selectable maximum affected hosts value  
+    - Contain / un-contain via Host Groups allows the user to simply select a Falcon host group (these are configured in the Falcon console)  
 
 ## Troubleshooting
   - The configuration file cannot be read.
