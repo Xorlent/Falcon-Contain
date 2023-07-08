@@ -120,7 +120,7 @@ $HostLst.ForeColor              = [System.Drawing.ColorTranslator]::FromHtml("#9
 
 #AID form entry field label
 $AidLabel                       = New-Object system.Windows.Forms.Label
-$AidLabel.text                  = "Target aid(s):"
+$AidLabel.text                  = "Target AID(s):"
 $AidLabel.AutoSize              = $true
 $AidLabel.width                 = 25
 $AidLabel.height                = 10
@@ -262,7 +262,7 @@ $SpecifyLiftContain2.Font         = New-Object System.Drawing.Font('Microsoft Sa
 
 #Hint regarding log file output at bottom of form
 $SafetyInfo                         = New-Object system.Windows.Forms.Label
-$SafetyInfo.text                  = "NOTE: Protected hosts (in ProtectedAIDs.txt) can only be contained/lifted using the AID dialog."
+$SafetyInfo.text                  = "NOTE: Protected hosts (in ProtectedAIDs.txt) can only be contained/lifted using the Target AIDs dialog."
 $SafetyInfo.AutoSize              = $true
 $SafetyInfo.width                 = 650
 $SafetyInfo.height                = 20
