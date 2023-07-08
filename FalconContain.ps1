@@ -8,7 +8,7 @@ if ([System.Environment]::OSVersion.Platform -ne 'Win32NT'){
   Exit
 }
 
-# API connction ID and secret encrypted with the Windows Data Protection API.
+# API connection ID and secret encrypted with the Windows Data Protection API.
 ###### NOTE: Encrypted config file is not portable between users/machines. ######
 $ConfigFile = 'FalconContain-Config.xml'
 
