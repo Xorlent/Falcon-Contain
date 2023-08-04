@@ -1,4 +1,4 @@
-﻿<# 
+﻿<#
 .NAME
     Falcon® Contain
 #>
@@ -76,7 +76,7 @@ $FormData = @{
   'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
   'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
-  
+
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
@@ -85,7 +85,6 @@ $FormData = $null
 if ($ValidToken)
     {
       $AuthString = 'Bearer ' + $ValidToken.access_token
-  
       $DownloadRequestHeaders = @{
       'Content-Type' = 'application/json'
       'Authorization' = $AuthString
@@ -299,7 +298,7 @@ $SpecifyContain1.Add_Click({ Hosts $HostQuery $HostQueryLimit "contain" })
 $SpecifyLiftContain2.Add_Click({ Groups $GroupSelect "lift_containment" })
 $SpecifyContain2.Add_Click({ Groups $GroupSelect "contain" })
 
-#region Logic 
+#region Logic
 
 function AIDs ($Payload,$HostAction) # This function BLINDLY takes the user's input and passes it to the API for AID contain/lift contain actions
 {
@@ -323,7 +322,7 @@ $FormData = @{
   'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
   'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
-  
+
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
@@ -332,7 +331,7 @@ $FormData = $null
 if ($ValidToken)
     {
       $AuthString = 'Bearer ' + $ValidToken.access_token
-  
+
       $DownloadRequestHeaders = @{
       'Content-Type' = 'application/json'
       'Authorization' = $AuthString
@@ -368,7 +367,7 @@ $FormData = @{
   'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
   'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
-  
+
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
@@ -377,7 +376,7 @@ $FormData = $null
 if ($ValidToken)
     {
       $AuthString = 'Bearer ' + $ValidToken.access_token
-  
+
       $DownloadRequestHeaders = @{
       'Content-Type' = 'application/json'
       'Authorization' = $AuthString
@@ -432,7 +431,7 @@ $FormData = @{
   'client_id' = [pscredential]::new('user',$apiUserSS).GetNetworkCredential().Password
   'client_secret' = [pscredential]::new('user',$apiKeySS).GetNetworkCredential().Password
   }
-  
+
 $PostRequest = 'https://' + $APIURL + '/oauth2/token'
 $ValidToken = Invoke-RestMethod -Uri $PostRequest -Method 'Post' -Body $FormData -Headers $TokenRequestHeaders | Select-Object access_token
 $FormData = $null
@@ -441,7 +440,7 @@ $FormData = $null
 if ($ValidToken)
     {
       $AuthString = 'Bearer ' + $ValidToken.access_token
-  
+
       $DownloadRequestHeaders = @{
       'Content-Type' = 'application/json'
       'Authorization' = $AuthString
