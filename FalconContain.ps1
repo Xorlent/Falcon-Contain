@@ -4,7 +4,7 @@
 #>
 
 if ([System.Environment]::OSVersion.Platform -ne 'Win32NT'){
-  Write-Host "Sorry, Falcon Contain is only intended for the Windows operating system."
+  Write-Output "Sorry, Falcon Contain is only intended for the Windows operating system."
   Exit
 }
 
@@ -91,8 +91,8 @@ if ($ValidToken)
     }
 else # We were not able to establish a connection to the API, so bail out of this session.
     {
-    Write-Host
-    Write-Host "Connection to the CrowdStrike API failed.  Verify your API credentials, permission, and network access to the API endpoint."
+    Write-Output ""
+    Write-Output "Connection to the CrowdStrike API failed.  Verify your API credentials, permission, and network access to the API endpoint."
     exit
     }
 } # End QueryGroups
@@ -300,14 +300,14 @@ function AIDs ($Payload,$HostAction) # This function BLINDLY takes the user's in
 {
 if(!$Payload.text -Or ($Payload.text -Eq "Format: `"aid1`",`"aid2`",`"aid3`""))
 {
-Write-Host "+++***=== NO AIDs SPECIFIED.  CANCELLING ACTION ===***+++"
+Write-Output "+++***=== NO AIDs SPECIFIED.  CANCELLING ACTION ===***+++"
 return #NO AIDs ENTERED!
 }
 
 $CommandDetails = "==>ACTION:" + $HostAction + "  ON AIDs: " + $Payload.text
 
-Write-Host "****************************************************************"
-Write-Host $CommandDetails
+Write-Output "****************************************************************"
+Write-Output $CommandDetails
 
 $TokenRequestHeaders = @{
   'accept' = 'application/json'
@@ -346,13 +346,13 @@ function Hosts ($Query,$QueryLimit,$HostAction) # This function verifies the que
 {
 if(!$Query.text -Or ($Query.text -Eq "Enter Query"))
 {
-Write-Host "+++***=== NO QUERY SPECIFIED.  CANCELLING ACTION ===***+++"
+Write-Output "+++***=== NO QUERY SPECIFIED.  CANCELLING ACTION ===***+++"
 return #NO QUERY ENTERED!
 }
 $CommandDetails = "==>ACTION:" + $HostAction + "  ON: " + $Query.text + " (MAX RECORDS: " + $QueryLimit.text + ")"
 
-Write-Host "*****************************************************************"
-Write-Host $CommandDetails
+Write-Output "*****************************************************************"
+Write-Output $CommandDetails
 
 $TokenRequestHeaders = @{
   'accept' = 'application/json'
@@ -389,12 +389,12 @@ if ($ValidToken)
       }
     if(!$HostList)
     {
-    Write-Host "+++***=== NO VALID MATCHING RECORDS.  CANCELLING ACTION ===***+++"
+    Write-Output "+++***=== NO VALID MATCHING RECORDS.  CANCELLING ACTION ===***+++"
     return # No resulting records!
     }
     $HostList = $HostList.Substring(0,$HostList.Length-1)
     $AffectedMachines = "==>AFFECTED HOSTS: " + $HostList
-    Write-Host $AffectedMachines
+    Write-Output $AffectedMachines
     $RequestBody = '{
     "ids": ['+
     $HostList+'
@@ -409,14 +409,14 @@ function Groups ($Group,$HostAction) # This function takes the selected Host Gro
 {
 if(!$Group.text)
 {
-Write-Host "+++***=== NO GROUP SELECTED.  CANCELLING ACTION ===***+++"
+Write-Output "+++***=== NO GROUP SELECTED.  CANCELLING ACTION ===***+++"
 return #NO GROUP SELECTED!
 }
 
 $CommandDetails = "==>ACTION:" + $HostAction + "  ON GROUP: " + $Group.text
 
-Write-Host "****************************************************************"
-Write-Host $CommandDetails
+Write-Output "****************************************************************"
+Write-Output $CommandDetails
 
 $TokenRequestHeaders = @{
   'accept' = 'application/json'
@@ -462,12 +462,12 @@ ForEach ($name in $GroupList.resources)
       }
     if(!$HostList1)
       {
-      Write-Host "+++***=== NO VALID MATCHING RECORDS.  CANCELLING ACTION ===***+++"
+      Write-Output "+++***=== NO VALID MATCHING RECORDS.  CANCELLING ACTION ===***+++"
       return # No resulting records!
       }
     $HostList1 = $HostList1.Substring(0,$HostList1.Length-1)
     $AffectedMachines = "==>AFFECTED HOSTS: " + $HostList1
-    Write-Host $AffectedMachines
+    Write-Output $AffectedMachines
     $RequestBody = '{
     "ids": ['+
     $HostList1+'
@@ -483,7 +483,7 @@ ForEach ($name in $GroupList.resources)
 
 #Configure logging
 $LaunchDTS = (Get-Date).ToString("MMddyy-HHmmss")
-$LogPath = "FalconContainer" + $LaunchDTS + ".log"
+$LogPath = "FalconContain" + $LaunchDTS + ".log"
 Start-Transcript -Path $LogPath
 
 #Launch form
