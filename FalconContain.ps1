@@ -17,6 +17,11 @@ $ConfigFile = 'FalconContain-Config.xml'
 $AIDFile = 'ProtectedAIDs.txt'
 $DefaultAPIURL = 'api.crowdstrike.com'
 
+#Configure logging
+$LaunchDTS = (Get-Date).ToString("MMddyy-HHmmss")
+$LogPath = "FalconContain" + $LaunchDTS + ".log"
+Start-Transcript -Path $LogPath
+
 # Force TLS 1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -91,7 +96,7 @@ if ($ValidToken)
     }
 else # We were not able to establish a connection to the API, so bail out of this session.
     {
-    Write-Output ""
+    Write-Output "****************************************************************"
     Write-Output "Connection to the CrowdStrike API failed.  Verify your API credentials, permission, and network access to the API endpoint."
     exit
     }
@@ -478,13 +483,6 @@ ForEach ($name in $GroupList.resources)
     }
 } # End function Groups
 #endregion
-
-#endregion
-
-#Configure logging
-$LaunchDTS = (Get-Date).ToString("MMddyy-HHmmss")
-$LogPath = "FalconContain" + $LaunchDTS + ".log"
-Start-Transcript -Path $LogPath
 
 #Launch form
 [void]$Form.ShowDialog()
