@@ -101,6 +101,9 @@ else # We were not able to establish a connection to the API, so bail out of thi
     }
 } # End QueryGroups
 
+Write-Output "****************************************************************"
+Write-Output "Fetching latest Falcon host groups..."
+
 $GroupList = QueryGroups # Call function to get and return an object with the current list of Falcon Host Groups
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -303,10 +306,10 @@ $SpecifyContain2.Add_Click({ Groups $GroupSelect "contain" })
 function AIDs ($Payload,$HostAction) # This function BLINDLY takes the user's input and passes it to the API for AID contain/lift contain actions
 {
 if(!$Payload.text -Or ($Payload.text -Eq "Format: `"aid1`",`"aid2`",`"aid3`""))
-{
-Write-Output "+++***=== NO AIDs SPECIFIED.  CANCELLING ACTION ===***+++"
-return #NO AIDs ENTERED!
-}
+  {
+  Write-Output "+++***=== NO AIDs SPECIFIED.  CANCELLING ACTION ===***+++"
+  return #NO AIDs ENTERED!
+  }
 
 $CommandDetails = "==>ACTION:" + $HostAction + "  ON AIDs: " + $Payload.text
 
@@ -484,6 +487,8 @@ ForEach ($name in $GroupList.resources)
 #endregion
 
 #Launch form
+Write-Output "****************************************************************"
+Write-Output "Launching GUI..."
 [void]$Form.ShowDialog()
 
 #End logging
