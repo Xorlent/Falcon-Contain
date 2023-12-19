@@ -6,7 +6,7 @@ CrowdStrike Falcon® Contain GUI for more powerful and rapid host containment
   Falcon®'s host contain action is powerful, but very limited within the Falcon® console.  This tool utilizes the CrowdStrike API to issue host containment actions based on hostname wildcards, IP ranges, defined host groups in Falcon®, or user-specified agent IDs (AID).  This tool can be useful for security operations teams needing to quickly contain groups of machines to prevent widespread infection and/or encryption of systems.
 
 ## Requirements
-  1. CrowdStrike Falcon® API Client ID and Secret with query and contain/uncontain rights
+  1. CrowdStrike Falcon® API Client ID and Secret with query and contain/uncontain rights (Scope: hosts, read + write)
   2. The Falcon® API endpoint URL for your tenant
   3. A GUI (non-Server Core) Windows install that can run PowerShell.  No additional PowerShell modules or libraries are required.
   4. FalconContain.ps1 from this repository  
