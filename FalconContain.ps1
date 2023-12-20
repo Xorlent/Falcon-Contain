@@ -10,11 +10,11 @@ if ([System.Environment]::OSVersion.Platform -ne 'Win32NT'){
 
 # API connection ID and secret encrypted with the Windows Data Protection API.
 ###### NOTE: Encrypted config file is not portable between users/machines. ######
-$ConfigFile = 'FalconContain-Config.xml'
+$ConfigFile = "$PSScriptRoot\FalconContain-Config.xml"
 
 # The host AIDs in the Protected AIDs file will never be contained/lifted, even if in a selected Host Group or a result from a host query.
 # Contain/lift by AID will STILL be allowed for these hosts though.
-$AIDFile = 'ProtectedAIDs.txt'
+$AIDFile = '.\ProtectedAIDs.txt'
 $DefaultAPIURL = 'api.crowdstrike.com'
 
 #Configure logging
